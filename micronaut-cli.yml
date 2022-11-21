@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: test.micronaut.data.failure
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle
+features: [annotation-api, app-name, data, data-r2dbc, flyway, gradle, http-client, jackson-databind, java, java-application, junit, logback, lombok, mariadb, micronaut-build, netty-server, r2dbc, reactor, reactor-http-client, readme, shade, test-resources, yaml]

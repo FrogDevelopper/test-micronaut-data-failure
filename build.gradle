@@ -1,0 +1,57 @@
+plugins {
+    id("io.micronaut.minimal.application") version "3.6.3"
+}
+
+version = "0.1"
+group = "test.micronaut.data.failure"
+
+repositories {
+    mavenCentral()
+}
+// core 3.5.4 => data 3.4.3 OK
+// core 3.6.0 => data 3.7.2 KO
+// core 3.7.4 => data 3.8.1 KO
+
+micronaut {
+    version.set("3.7.4")
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("test.micronaut.data.failure.*")
+    }
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
+application {
+    mainClass.set("test.micronaut.data.failure.Application")
+}
+
+
+dependencies {
+    annotationProcessor("org.projectlombok:lombok")
+    annotationProcessor("io.micronaut:micronaut-inject-java")
+    annotationProcessor("io.micronaut.data:micronaut-data-processor")
+
+    implementation("io.micronaut:micronaut-jackson-databind")
+    implementation("io.micronaut:micronaut-validation")
+    implementation("io.micronaut.data:micronaut-data-r2dbc")
+    implementation("io.micronaut.flyway:micronaut-flyway")
+    implementation("io.micronaut.reactor:micronaut-reactor")
+    implementation("jakarta.annotation:jakarta.annotation-api")
+
+    compileOnly("org.projectlombok:lombok")
+
+    runtimeOnly("ch.qos.logback:logback-classic")
+    runtimeOnly("org.flywaydb:flyway-mysql")
+    runtimeOnly("org.mariadb:r2dbc-mariadb")
+    runtimeOnly("io.r2dbc:r2dbc-pool")
+    runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
+
+    testImplementation("org.assertj:assertj-core:3.23.1")
+}

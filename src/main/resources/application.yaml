@@ -1,0 +1,24 @@
+micronaut:
+  application:
+    name: test-micronaut-data
+
+r2dbc:
+  datasources:
+    default:
+      url: r2dbc:mariadb://localhost:3306/db
+      database: test-micronaut
+      username: root
+      password: example
+      dialect: MYSQL
+
+
+flyway:
+  datasources:
+    default:
+      enabled: true
+      url: jdbc:mariadb://localhost:3306
+      username: root
+      password: example
+      create-schemas: true
+      clean-schema: true
+      schemas: test-micronaut
